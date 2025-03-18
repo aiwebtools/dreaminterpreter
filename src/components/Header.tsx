@@ -20,6 +20,35 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Only close if clicking outside the navigation area
+      if (!target.closest('[data-mobile-nav]') && !target.closest('[data-mobile-toggle]')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isMobileMenuOpen]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   const navItems = [
     { 
       label: 'Dream Interpreter GPT', 
@@ -32,6 +61,8 @@ const Header: React.FC = () => {
       url: 'https://www.aiwebtools.ai' 
     }
   ];
+
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -73,8 +104,11 @@ const Header: React.FC = () => {
         
         {/* Mobile menu button */}
         <button 
-          className="md:hidden z-10 text-dream-text p-2"
+          data-mobile-toggle
+          className="md:hidden z-20 text-dream-text p-2 relative"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMobileMenuOpen}
         >
           {isMobileMenuOpen ? (
             <X className="h-6 w-6" />
@@ -86,14 +120,26 @@ const Header: React.FC = () => {
       
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 bg-dream-dark/95 backdrop-blur-lg z-40 flex flex-col items-center justify-center">
+        <div 
+          data-mobile-nav
+          className="md:hidden fixed inset-0 bg-dream-dark/95 backdrop-blur-lg z-10 flex flex-col items-center justify-center"
+        >
+          {/* Close button at the top */}
+          <button 
+            onClick={closeMobileMenu}
+            className="absolute top-4 right-4 text-dream-text p-2 hover:text-dream-accent transition-colors"
+            aria-label="Close menu"
+          >
+            <X className="h-6 w-6" />
+          </button>
+          
           <div className="flex flex-col items-center space-y-8">
             {navItems.map((item, index) => (
               <a 
                 key={index}
                 href={item.url}
-                className={`text-xl font-medium ${index === 0 ? 'text-dream-accent' : 'text-dream-text'}`}
-                onClick={() => setIsMobileMenuOpen(false)}
+                className={`text-xl font-medium ${index === 0 ? 'text-dream-accent' : 'text-dream-text'} hover:text-dream-accent transition-colors`}
+                onClick={closeMobileMenu}
                 target={item.url.startsWith('http') ? '_blank' : undefined}
                 rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}
               >
@@ -106,7 +152,7 @@ const Header: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3 mt-4 bg-gradient rounded-full text-white font-medium text-lg button-shine"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={closeMobileMenu}
             >
               Try Now
             </a>
