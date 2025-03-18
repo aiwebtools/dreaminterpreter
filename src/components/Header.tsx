@@ -73,8 +73,12 @@ const Header: React.FC = () => {
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
   
+  // Fixed toggle function with no event parameter to avoid any conflicts
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(prevState => !prevState);
+    // Use a callback to ensure we get the latest state
+    setIsMobileMenuOpen(current => !current);
+    // Add a small console log to help with debugging
+    console.log("Mobile menu toggled, new state:", !isMobileMenuOpen);
   };
 
   return (
@@ -115,25 +119,27 @@ const Header: React.FC = () => {
           </a>
         </nav>
         
-        {/* Mobile menu button */}
+        {/* Mobile menu button - Made more prominent and improved hit area */}
         <button 
           data-mobile-toggle
-          className="md:hidden z-50 text-dream-text p-2 relative"
+          className="md:hidden z-50 text-dream-text p-3 relative touch-manipulation"
           onClick={toggleMobileMenu}
           aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMobileMenuOpen}
+          type="button"
         >
           {isMobileMenuOpen ? (
-            <X className="h-6 w-6" />
+            <X className="h-7 w-7" />
           ) : (
-            <Menu className="h-6 w-6" />
+            <Menu className="h-7 w-7" />
           )}
         </button>
       </div>
       
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Always rendered but conditionally visible */}
       <div 
         data-mobile-nav
+        onClick={(e) => e.stopPropagation()} // Prevent clicks from bubbling up
         className={`md:hidden fixed inset-0 bg-dream-dark/95 backdrop-blur-lg z-40 flex flex-col items-center justify-center transition-opacity duration-300 ${
           isMobileMenuOpen 
             ? 'opacity-100 pointer-events-auto' 
@@ -145,6 +151,7 @@ const Header: React.FC = () => {
           onClick={closeMobileMenu}
           className="absolute top-4 right-4 text-dream-text p-2 hover:text-dream-accent transition-colors"
           aria-label="Close menu"
+          type="button"
         >
           <X className="h-6 w-6" />
         </button>
