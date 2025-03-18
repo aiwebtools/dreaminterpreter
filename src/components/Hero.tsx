@@ -50,14 +50,13 @@ const Hero: React.FC = () => {
           
           <div className="w-full lg:w-5/12 flex justify-center items-center relative animate-fade-in" style={{animationDelay: "0.5s"}}>
             <div className="relative w-full aspect-square max-w-md">
-              <Dreamcatcher className="absolute inset-0 flex items-center justify-center animate-float" />
-              
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-32 h-32 rounded-full flex items-center justify-center">
-                  <div className="absolute inset-0 rounded-full bg-dream-accent/20 animate-pulse-glow"></div>
-                  <Brain className="w-16 h-16 text-white" />
-                </div>
-              </div>
+              <img 
+                src="https://ideogram.ai/assets/image/lossless/response/5LG7DvXbRVSsWDhBjAg1pg" 
+                alt="Dream Interpretation visualization" 
+                className="w-full h-auto rounded-lg shadow-xl shadow-dream-accent/10 z-10 relative"
+              />
+              <div className="absolute -inset-4 bg-dream-accent/5 rounded-xl blur-md -z-0"></div>
+              <Dreamcatcher className="absolute inset-0 flex items-center justify-center animate-float opacity-30" />
             </div>
           </div>
         </div>
