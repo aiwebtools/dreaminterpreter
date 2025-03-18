@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Logo from './Logo';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Button } from './ui/button';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,21 +23,12 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when clicking outside
+  // Close mobile menu when switching to desktop view
   useEffect(() => {
-    if (!isMobileMenuOpen) return;
-    
-    const handleClickOutside = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      // Only close if clicking outside the navigation area
-      if (!target.closest('[data-mobile-nav]') && !target.closest('[data-mobile-toggle]')) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-    
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [isMobileMenuOpen]);
+    if (!isMobile && isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+  }, [isMobile, isMobileMenuOpen]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -51,13 +43,6 @@ const Header: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
-  // Close mobile menu on route change or when switching to desktop view
-  useEffect(() => {
-    if (!isMobile && isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
-    }
-  }, [isMobile, isMobileMenuOpen]);
-
   const navItems = [
     { 
       label: 'Dream Interpreter GPT', 
@@ -71,13 +56,12 @@ const Header: React.FC = () => {
     }
   ];
 
-  const closeMobileMenu = () => setIsMobileMenuOpen(false);
-  
-  // Fixed toggle function with simplified direct state setting
-  const toggleMobileMenu = () => {
-    const newState = !isMobileMenuOpen;
-    setIsMobileMenuOpen(newState);
-    console.log("Mobile menu toggled, new state:", newState);
+  // Simple direct toggle function
+  const toggleMobileMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    console.log("Mobile menu toggled to:", !isMobileMenuOpen);
   };
 
   return (
@@ -118,65 +102,55 @@ const Header: React.FC = () => {
           </a>
         </nav>
         
-        {/* Mobile menu toggle button - Enhanced for better touch targets */}
-        <button 
-          data-mobile-toggle
-          className="md:hidden z-50 p-4 m-[-1rem] relative touch-manipulation"
+        {/* Mobile menu toggle button - Enhanced with Button component */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden z-50 text-dream-text p-0 m-0 h-12 w-12 touch-manipulation"
           onClick={toggleMobileMenu}
           aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMobileMenuOpen}
           type="button"
         >
           {isMobileMenuOpen ? (
-            <X className="h-7 w-7 text-dream-text" />
+            <X className="h-7 w-7" />
           ) : (
-            <Menu className="h-7 w-7 text-dream-text" />
+            <Menu className="h-7 w-7" />
           )}
-        </button>
+        </Button>
       </div>
       
-      {/* Mobile Navigation - Improved visibility and interaction */}
-      {isMobileMenuOpen && (
-        <div 
-          data-mobile-nav
-          className="md:hidden fixed inset-0 bg-dream-dark/95 backdrop-blur-lg z-40 flex flex-col items-center justify-center"
-        >
-          {/* Close button at the top */}
-          <button 
-            onClick={closeMobileMenu}
-            className="absolute top-4 right-4 text-dream-text p-2 hover:text-dream-accent transition-colors"
-            aria-label="Close menu"
-            type="button"
-          >
-            <X className="h-6 w-6" />
-          </button>
-          
-          <div className="flex flex-col items-center space-y-8">
-            {navItems.map((item, index) => (
-              <a 
-                key={index}
-                href={item.url}
-                className={`text-xl font-medium ${index === 0 ? 'text-dream-accent' : 'text-dream-text'} hover:text-dream-accent transition-colors`}
-                onClick={closeMobileMenu}
-                target={item.url.startsWith('http') ? '_blank' : undefined}
-                rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-              >
-                {item.label}
-              </a>
-            ))}
-            
+      {/* Mobile Navigation - Always rendered but conditionally shown */}
+      <div 
+        className={`md:hidden fixed inset-0 bg-dream-dark/95 backdrop-blur-lg z-40 flex flex-col items-center justify-center transition-opacity duration-300 ${
+          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="flex flex-col items-center space-y-8">
+          {navItems.map((item, index) => (
             <a 
-              href="https://chatgpt.com/g/g-67d9371a80988191909edd68d54a1c7f-dream-interpreter-gpt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3 mt-4 bg-gradient rounded-full text-white font-medium text-lg button-shine"
-              onClick={closeMobileMenu}
+              key={index}
+              href={item.url}
+              className={`text-xl font-medium ${index === 0 ? 'text-dream-accent' : 'text-dream-text'} hover:text-dream-accent transition-colors`}
+              onClick={() => setIsMobileMenuOpen(false)}
+              target={item.url.startsWith('http') ? '_blank' : undefined}
+              rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}
             >
-              Try Now
+              {item.label}
             </a>
-          </div>
+          ))}
+          
+          <a 
+            href="https://chatgpt.com/g/g-67d9371a80988191909edd68d54a1c7f-dream-interpreter-gpt"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-3 mt-4 bg-gradient rounded-full text-white font-medium text-lg button-shine"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Try Now
+          </a>
         </div>
-      )}
+      </div>
     </header>
   );
 };
