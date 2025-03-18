@@ -73,12 +73,11 @@ const Header: React.FC = () => {
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
   
-  // Fixed toggle function with no event parameter to avoid any conflicts
+  // Fixed toggle function with simplified direct state setting
   const toggleMobileMenu = () => {
-    // Use a callback to ensure we get the latest state
-    setIsMobileMenuOpen(current => !current);
-    // Add a small console log to help with debugging
-    console.log("Mobile menu toggled, new state:", !isMobileMenuOpen);
+    const newState = !isMobileMenuOpen;
+    setIsMobileMenuOpen(newState);
+    console.log("Mobile menu toggled, new state:", newState);
   };
 
   return (
@@ -119,68 +118,65 @@ const Header: React.FC = () => {
           </a>
         </nav>
         
-        {/* Mobile menu button - Made more prominent and improved hit area */}
+        {/* Mobile menu toggle button - Enhanced for better touch targets */}
         <button 
           data-mobile-toggle
-          className="md:hidden z-50 text-dream-text p-3 relative touch-manipulation"
+          className="md:hidden z-50 p-4 m-[-1rem] relative touch-manipulation"
           onClick={toggleMobileMenu}
           aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMobileMenuOpen}
           type="button"
         >
           {isMobileMenuOpen ? (
-            <X className="h-7 w-7" />
+            <X className="h-7 w-7 text-dream-text" />
           ) : (
-            <Menu className="h-7 w-7" />
+            <Menu className="h-7 w-7 text-dream-text" />
           )}
         </button>
       </div>
       
-      {/* Mobile Navigation - Always rendered but conditionally visible */}
-      <div 
-        data-mobile-nav
-        onClick={(e) => e.stopPropagation()} // Prevent clicks from bubbling up
-        className={`md:hidden fixed inset-0 bg-dream-dark/95 backdrop-blur-lg z-40 flex flex-col items-center justify-center transition-opacity duration-300 ${
-          isMobileMenuOpen 
-            ? 'opacity-100 pointer-events-auto' 
-            : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        {/* Close button at the top */}
-        <button 
-          onClick={closeMobileMenu}
-          className="absolute top-4 right-4 text-dream-text p-2 hover:text-dream-accent transition-colors"
-          aria-label="Close menu"
-          type="button"
+      {/* Mobile Navigation - Improved visibility and interaction */}
+      {isMobileMenuOpen && (
+        <div 
+          data-mobile-nav
+          className="md:hidden fixed inset-0 bg-dream-dark/95 backdrop-blur-lg z-40 flex flex-col items-center justify-center"
         >
-          <X className="h-6 w-6" />
-        </button>
-        
-        <div className="flex flex-col items-center space-y-8">
-          {navItems.map((item, index) => (
-            <a 
-              key={index}
-              href={item.url}
-              className={`text-xl font-medium ${index === 0 ? 'text-dream-accent' : 'text-dream-text'} hover:text-dream-accent transition-colors`}
-              onClick={closeMobileMenu}
-              target={item.url.startsWith('http') ? '_blank' : undefined}
-              rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-            >
-              {item.label}
-            </a>
-          ))}
-          
-          <a 
-            href="https://chatgpt.com/g/g-67d9371a80988191909edd68d54a1c7f-dream-interpreter-gpt"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-3 mt-4 bg-gradient rounded-full text-white font-medium text-lg button-shine"
+          {/* Close button at the top */}
+          <button 
             onClick={closeMobileMenu}
+            className="absolute top-4 right-4 text-dream-text p-2 hover:text-dream-accent transition-colors"
+            aria-label="Close menu"
+            type="button"
           >
-            Try Now
-          </a>
+            <X className="h-6 w-6" />
+          </button>
+          
+          <div className="flex flex-col items-center space-y-8">
+            {navItems.map((item, index) => (
+              <a 
+                key={index}
+                href={item.url}
+                className={`text-xl font-medium ${index === 0 ? 'text-dream-accent' : 'text-dream-text'} hover:text-dream-accent transition-colors`}
+                onClick={closeMobileMenu}
+                target={item.url.startsWith('http') ? '_blank' : undefined}
+                rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                {item.label}
+              </a>
+            ))}
+            
+            <a 
+              href="https://chatgpt.com/g/g-67d9371a80988191909edd68d54a1c7f-dream-interpreter-gpt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3 mt-4 bg-gradient rounded-full text-white font-medium text-lg button-shine"
+              onClick={closeMobileMenu}
+            >
+              Try Now
+            </a>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 };
