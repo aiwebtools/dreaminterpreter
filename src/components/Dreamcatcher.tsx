@@ -35,20 +35,20 @@ const Dreamcatcher: React.FC<{ className?: string }> = ({ className = '' }) => {
       className={`relative transition-transform duration-300 ease-out ${className}`}
     >
       {/* Outer ring */}
-      <div className="w-64 h-64 rounded-full border-2 border-dream-accent relative flex items-center justify-center">
+      <div className="w-64 h-64 rounded-full border-2 border-white/80 relative flex items-center justify-center">
         {/* Inner web */}
-        <div className="w-52 h-52 rounded-full border border-dream-cyan/60 relative">
-          <div className="w-40 h-40 rounded-full border border-dream-accent/50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-          <div className="w-28 h-28 rounded-full border border-dream-pink/50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-          <div className="w-16 h-16 rounded-full border border-dream-cyan/30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-            <div className="w-4 h-4 bg-dream-bright rounded-full animate-pulse-glow"></div>
+        <div className="w-52 h-52 rounded-full border border-dream-cyan/90 relative">
+          <div className="w-40 h-40 rounded-full border border-white/70 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="w-28 h-28 rounded-full border border-dream-pink/80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="w-16 h-16 rounded-full border border-dream-cyan/80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+            <div className="w-4 h-4 bg-white rounded-full animate-pulse-glow"></div>
           </div>
           
           {/* Web threads */}
           {Array.from({ length: 8 }).map((_, i) => (
             <div 
               key={i}
-              className="absolute top-1/2 left-1/2 w-full h-0.5 bg-gradient-to-r from-transparent via-dream-pink/30 to-transparent" 
+              className="absolute top-1/2 left-1/2 w-full h-0.5 bg-gradient-to-r from-transparent via-white/60 to-transparent" 
               style={{ transform: `translate(-50%, -50%) rotate(${i * 22.5}deg)` }}
             ></div>
           ))}
@@ -66,11 +66,11 @@ const Dreamcatcher: React.FC<{ className?: string }> = ({ className = '' }) => {
             }}
           >
             <div className="relative h-20 w-1 mx-auto">
-              <div className="absolute top-0 w-px h-full bg-dream-accent/50"></div>
+              <div className="absolute top-0 w-px h-full bg-white/70"></div>
               <div 
                 className="absolute bottom-0 w-6 h-12 animate-float"
                 style={{ 
-                  background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.3) 100%)',
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(139, 92, 246, 0.6) 100%)',
                   clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
                   borderRadius: '50%'
                 }}
@@ -81,8 +81,8 @@ const Dreamcatcher: React.FC<{ className?: string }> = ({ className = '' }) => {
       </div>
       
       {/* Glowing effects */}
-      <div className="absolute inset-0 rounded-full bg-dream-accent/5 filter blur-xl animate-pulse-glow"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-dream-accent/20 rounded-full filter blur-xl"></div>
+      <div className="absolute inset-0 rounded-full bg-white/20 filter blur-xl animate-pulse-glow"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/30 rounded-full filter blur-xl"></div>
     </div>
   );
 };
