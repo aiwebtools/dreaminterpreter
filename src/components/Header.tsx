@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Logo from './Logo';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +51,13 @@ const Header: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
+  // Close mobile menu on route change or when switching to desktop view
+  useEffect(() => {
+    if (!isMobile && isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+  }, [isMobile, isMobileMenuOpen]);
+
   const navItems = [
     { 
       label: 'Dream Interpreter GPT', 
@@ -63,6 +72,10 @@ const Header: React.FC = () => {
   ];
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
+  
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(prevState => !prevState);
+  };
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -105,8 +118,8 @@ const Header: React.FC = () => {
         {/* Mobile menu button */}
         <button 
           data-mobile-toggle
-          className="md:hidden z-20 text-dream-text p-2 relative"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden z-50 text-dream-text p-2 relative"
+          onClick={toggleMobileMenu}
           aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMobileMenuOpen}
         >
@@ -119,46 +132,48 @@ const Header: React.FC = () => {
       </div>
       
       {/* Mobile Navigation */}
-      {isMobileMenuOpen && (
-        <div 
-          data-mobile-nav
-          className="md:hidden fixed inset-0 bg-dream-dark/95 backdrop-blur-lg z-10 flex flex-col items-center justify-center"
+      <div 
+        data-mobile-nav
+        className={`md:hidden fixed inset-0 bg-dream-dark/95 backdrop-blur-lg z-40 flex flex-col items-center justify-center transition-opacity duration-300 ${
+          isMobileMenuOpen 
+            ? 'opacity-100 pointer-events-auto' 
+            : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        {/* Close button at the top */}
+        <button 
+          onClick={closeMobileMenu}
+          className="absolute top-4 right-4 text-dream-text p-2 hover:text-dream-accent transition-colors"
+          aria-label="Close menu"
         >
-          {/* Close button at the top */}
-          <button 
-            onClick={closeMobileMenu}
-            className="absolute top-4 right-4 text-dream-text p-2 hover:text-dream-accent transition-colors"
-            aria-label="Close menu"
-          >
-            <X className="h-6 w-6" />
-          </button>
-          
-          <div className="flex flex-col items-center space-y-8">
-            {navItems.map((item, index) => (
-              <a 
-                key={index}
-                href={item.url}
-                className={`text-xl font-medium ${index === 0 ? 'text-dream-accent' : 'text-dream-text'} hover:text-dream-accent transition-colors`}
-                onClick={closeMobileMenu}
-                target={item.url.startsWith('http') ? '_blank' : undefined}
-                rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-              >
-                {item.label}
-              </a>
-            ))}
-            
+          <X className="h-6 w-6" />
+        </button>
+        
+        <div className="flex flex-col items-center space-y-8">
+          {navItems.map((item, index) => (
             <a 
-              href="https://chatgpt.com/g/g-67d9371a80988191909edd68d54a1c7f-dream-interpreter-gpt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3 mt-4 bg-gradient rounded-full text-white font-medium text-lg button-shine"
+              key={index}
+              href={item.url}
+              className={`text-xl font-medium ${index === 0 ? 'text-dream-accent' : 'text-dream-text'} hover:text-dream-accent transition-colors`}
               onClick={closeMobileMenu}
+              target={item.url.startsWith('http') ? '_blank' : undefined}
+              rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}
             >
-              Try Now
+              {item.label}
             </a>
-          </div>
+          ))}
+          
+          <a 
+            href="https://chatgpt.com/g/g-67d9371a80988191909edd68d54a1c7f-dream-interpreter-gpt"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-3 mt-4 bg-gradient rounded-full text-white font-medium text-lg button-shine"
+            onClick={closeMobileMenu}
+          >
+            Try Now
+          </a>
         </div>
-      )}
+      </div>
     </header>
   );
 };
