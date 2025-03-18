@@ -98,7 +98,7 @@ const Header: React.FC = () => {
             rel="noopener noreferrer"
             className="px-6 py-2 bg-gradient rounded-full text-white font-medium text-sm button-shine hover:shadow-lg hover:shadow-dream-accent/20 transition-shadow duration-300"
           >
-            Try Now
+            Decode Your Dreams Now
           </a>
         </nav>
         
@@ -147,7 +147,7 @@ const Header: React.FC = () => {
             className="px-8 py-3 mt-4 bg-gradient rounded-full text-white font-medium text-lg button-shine"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Try Now
+            Decode Your Dreams Now
           </a>
         </div>
       </div>
