@@ -19,6 +19,9 @@ const StarField: React.FC<StarFieldProps> = ({
     const context = canvas.getContext('2d');
     if (!context) return;
 
+    // Initialize stars array before it's used
+    const stars: { x: number; y: number; size: number; opacity: number; speed: number }[] = [];
+    
     // Set canvas to full width/height
     const handleResize = () => {
       canvas.width = window.innerWidth;
@@ -26,12 +29,7 @@ const StarField: React.FC<StarFieldProps> = ({
       generateStars();
     };
     
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
     // Generate stars
-    const stars: { x: number; y: number; size: number; opacity: number; speed: number }[] = [];
-    
     function generateStars() {
       stars.length = 0;
       for (let i = 0; i < starCount; i++) {
@@ -44,6 +42,9 @@ const StarField: React.FC<StarFieldProps> = ({
         });
       }
     }
+    
+    window.addEventListener('resize', handleResize);
+    handleResize();
 
     // Animation
     function animate() {
