@@ -44,7 +44,7 @@ const Disclaimer: React.FC = () => {
               <ShieldCheck className="text-dream-accent w-5 h-5 mr-2 mt-0.5" />
               <p className="text-sm">
                 For our full Terms of Service, please visit our 
-                <a href="https://aiwebtools.ai/terms-of-services" target="_blank" rel="noopener noreferrer" className="text-dream-accent hover:underline ml-1">
+                <a href="https://aiwebtools.lovable.app/disclaimers" target="_blank" rel="noopener noreferrer" className="text-dream-accent hover:underline ml-1">
                   Terms of Service
                 </a> 
                 . For information about how we handle your data, please review our 

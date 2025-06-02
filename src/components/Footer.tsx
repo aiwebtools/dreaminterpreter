@@ -90,7 +90,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="https://aiwebtools.ai/terms-of-services" 
+                  href="https://aiwebtools.lovable.app/disclaimers" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-dream-text/70 hover:text-dream-accent transition-colors"
@@ -108,6 +108,13 @@ const Footer: React.FC = () => {
               </li>
             </ul>
           </div>
+        </div>
+        
+        {/* Small disclaimer notice */}
+        <div className="mb-6 text-center">
+          <p className="text-dream-text/60 text-sm font-medium">
+            For informational, educational, and research purposes only
+          </p>
         </div>
         
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center">
