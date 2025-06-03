@@ -11,8 +11,9 @@ const Footer: React.FC = () => {
           <div className="col-span-1 md:col-span-2">
             <Logo withText withTagline size="md" />
             <p className="mt-4 text-dream-text/70 max-w-md">
+              <strong>AI Web Tools LLC</strong> - Premium AI tools and web applications for modern businesses. 
               Dream Interpreter GPT analyzes, interprets, and visualizes your dreams 
-              for self-discovery and personal growth, unlocking the mysterious language of your subconscious.
+              for self-discovery and personal growth, powered by advanced AI technology from <strong>AIWEBTOOLS.AI</strong>.
             </p>
             
             <div className="mt-6 space-y-2">
@@ -34,7 +35,7 @@ const Footer: React.FC = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-bold mb-4 text-dream-text">Quick Links</h3>
+            <h3 className="text-lg font-bold mb-4 text-dream-text">AI Tools & Services</h3>
             <ul className="space-y-2">
               <li>
                 <a 
@@ -43,7 +44,7 @@ const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="text-dream-text/70 hover:text-dream-accent transition-colors"
                 >
-                  Dream Interpreter GPT
+                  Dream Interpreter AI Tool
                 </a>
               </li>
               <li>
@@ -51,7 +52,7 @@ const Footer: React.FC = () => {
                   href="#faq" 
                   className="text-dream-text/70 hover:text-dream-accent transition-colors"
                 >
-                  FAQ
+                  AI Tools FAQ
                 </a>
               </li>
               <li>
@@ -59,7 +60,7 @@ const Footer: React.FC = () => {
                   href="#disclaimer" 
                   className="text-dream-text/70 hover:text-dream-accent transition-colors"
                 >
-                  Disclaimer
+                  AI Tools Disclaimer
                 </a>
               </li>
               <li>
@@ -69,14 +70,14 @@ const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="text-dream-text/70 hover:text-dream-accent transition-colors"
                 >
-                  More AI Tools
+                  More AI Web Tools
                 </a>
               </li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-lg font-bold mb-4 text-dream-text">Legal</h3>
+            <h3 className="text-lg font-bold mb-4 text-dream-text">Legal & Support</h3>
             <ul className="space-y-2">
               <li>
                 <a 
@@ -113,13 +114,16 @@ const Footer: React.FC = () => {
         {/* Small disclaimer notice */}
         <div className="mb-6 text-center">
           <p className="text-dream-text/60 text-sm font-medium">
-            For informational, educational, and research purposes only
+            Professional AI Tools for informational, educational, and research purposes only
+          </p>
+          <p className="text-dream-text/50 text-xs mt-1">
+            Powered by <strong>AI Web Tools LLC</strong> - Leading provider of advanced AI web applications
           </p>
         </div>
         
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-dream-text/50 text-sm">
-            © 2025 <a href="https://www.aiwebtools.ai" className="hover:text-dream-accent transition-colors">AI WEB TOOLS LLC</a> All rights reserved.
+            © 2025 <a href="https://www.aiwebtools.ai" className="hover:text-dream-accent transition-colors font-semibold">AI WEB TOOLS LLC</a> - <strong>AIWEBTOOLS.AI</strong> All rights reserved.
           </p>
           
           <a 
@@ -128,7 +132,7 @@ const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            More AI Tools
+            Explore All AI Tools
             <ExternalLink className="w-4 h-4 ml-2" />
           </a>
         </div>

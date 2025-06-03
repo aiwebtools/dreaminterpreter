@@ -17,15 +17,17 @@ const Hero: React.FC = () => {
           <div className="w-full lg:w-7/12 space-y-8 text-center lg:text-left">
             <div className="inline-flex items-center py-1.5 px-3 rounded-full bg-dream-accent/10 border border-dream-accent/20 text-dream-accent text-sm font-medium animate-fade-in">
               <Sparkle className="w-4 h-4 mr-2" />
-              <span>Unlock the mysteries of your subconscious</span>
+              <span>Premium AI Tools by AIWEBTOOLS.AI</span>
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight animate-fade-in" style={{animationDelay: "0.2s"}}>
-              <span className="text-gradient">Unlock Your Dreams</span> with Advanced AI Interpretation
+              <span className="text-gradient">AI Web Tools</span> Dream Interpreter GPT
             </h1>
             
             <p className="text-lg md:text-xl text-dream-text/80 max-w-xl mx-auto lg:mx-0 animate-fade-in" style={{animationDelay: "0.3s"}}>
-              Dream Interpreter GPT analyzes your dreams using psychology, mythology and creative visualization to provide meaningful insights for personal growth and self-discovery.
+              Experience the most advanced AI tools for dream analysis and interpretation. 
+              AI Web Tools LLC presents cutting-edge AI technology that analyzes your dreams using psychology, 
+              mythology and creative visualization for meaningful insights and personal growth.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4 animate-fade-in" style={{animationDelay: "0.4s"}}>
@@ -35,16 +37,26 @@ const Hero: React.FC = () => {
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-gradient rounded-full text-white font-bold text-lg button-shine hover:shadow-lg hover:shadow-dream-accent/20 transition-shadow duration-300 w-full sm:w-auto"
               >
-                Interpret My Dream
+                Try Our AI Dream Tool
               </a>
               
               <a 
                 href="#how-it-works" 
                 className="px-8 py-4 rounded-full border border-dream-accent/30 bg-dream-accent/10 text-dream-text font-medium text-lg hover:bg-dream-accent/20 transition-colors duration-300 flex items-center justify-center w-full sm:w-auto"
               >
-                How It Works
+                Explore AI Tools
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>
+            </div>
+            
+            {/* SEO-friendly content */}
+            <div className="pt-8 text-sm text-dream-text/60 space-y-2">
+              <p>
+                <strong>AI Web Tools</strong> - Your trusted source for premium AI tools and web applications
+              </p>
+              <p>
+                Part of the comprehensive <strong>AIWEBTOOLS.AI</strong> suite of advanced artificial intelligence solutions
+              </p>
             </div>
           </div>
           
@@ -52,7 +64,7 @@ const Hero: React.FC = () => {
             <div className="relative w-full aspect-square max-w-md">
               <img 
                 src="https://ideogram.ai/assets/image/lossless/response/5LG7DvXbRVSsWDhBjAg1pg" 
-                alt="Dream Interpretation visualization" 
+                alt="AI Web Tools Dream Interpretation - Advanced AI Tools for Dream Analysis" 
                 className="w-full h-auto rounded-lg shadow-xl shadow-dream-accent/10 z-10 relative"
               />
               <div className="absolute -inset-4 bg-dream-accent/5 rounded-xl blur-md -z-0"></div>
