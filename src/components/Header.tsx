@@ -52,7 +52,7 @@ const Header: React.FC = () => {
     { label: 'Disclaimer', url: '#disclaimer' },
     { 
       label: 'More AI Tools', 
-      url: 'https://www.aiwebtools.ai' 
+      url: 'https://aiwebtools.lovable.app/?via=aiwebtools' 
     }
   ];
 

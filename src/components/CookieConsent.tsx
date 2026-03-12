@@ -46,7 +46,7 @@ const CookieConsent: React.FC = () => {
             Privacy Policy
           </a> 
           and 
-          <a href="https://aiwebtools.ai/terms-of-services" className="text-dream-accent hover:underline mx-1" target="_blank" rel="noopener noreferrer">
+          <a href="https://aiwebtools.lovable.app/disclaimers" className="text-dream-accent hover:underline mx-1" target="_blank" rel="noopener noreferrer">
             Terms of Service
           </a>. 
           This includes the use of cookies to enhance your experience.
