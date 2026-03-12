@@ -127,7 +127,7 @@ const Footer: React.FC = () => {
           </p>
           
           <a 
-            href="https://www.aiwebtools.ai" 
+            href="https://aiwebtools.lovable.app/?via=aiwebtools" 
             className="flex items-center mt-4 md:mt-0 bg-gradient p-2 px-4 rounded-full text-white text-sm font-medium"
             target="_blank"
             rel="noopener noreferrer"
